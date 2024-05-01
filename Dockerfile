@@ -15,12 +15,14 @@ RUN wget --no-check-certificate -O openjdk-21.tar.gz https://download.java.net/j
 ENV JAVA_HOME=/opt/openjdk-21
 ENV PATH=$JAVA_HOME/bin:$PATH
 
-# Download Geyser-Standalone.jar
-RUN wget --no-check-certificate -O /opt/Geyser-Standalone.jar https://download.geysermc.org/v2/projects/geyser/versions/latest/builds/latest/downloads/standalone
+# Create a directory for application files
+RUN mkdir -p /config
 
+# Download Geyser-Standalone.jar to the /config directory
+RUN wget --no-check-certificate -O /config/Geyser-Standalone.jar https://download.geysermc.org/v2/projects/geyser/versions/latest/builds/latest/downloads/standalone
 
-# Set the working directory
-WORKDIR /opt
+# Set the working directory to /config
+WORKDIR /config
 
 # Run Geyser-Standalone.jar
 CMD ["java", "-jar", "Geyser-Standalone.jar"]
